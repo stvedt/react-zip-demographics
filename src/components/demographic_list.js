@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import DemographicDetail from './demographic_detail';
+import ZipDetail from './zip_detail';
 import * as compares from '../helpers/sort_compares';
 
 class DemographicList extends Component {
   constructor(props){
     super(props);
-
-    this.originalDemographicList = props.data.columns.slice();
+    // console.log(props.data);
+    this.originalDemographicList = props.data.meta.view.columns.slice();
+    this.zipList = props.data.data;
+    console.log(this.originalDemographicList);
     this.uniqueFilters = ['default','count', 'percent']
     this.state = {
       sort: 'default',
       filter: 'default',
-      demographicList: props.data.columns,
-      sortedDemographicList: this.originalDemographicList.slice()
+      demographicList: this.originalDemographicList.slice(),
+      zipList: this.zipList,
+      sortedZipList: this.zipList.slice()
     }
   }
 
@@ -23,20 +27,16 @@ class DemographicList extends Component {
     this.setState({ sort: sortType});
 
     switch(sortType){
-      case 'default':
-        this.setState({filter:'default'});
-        sortedList = this.originalDemographicList.slice();
-        break;
       case 'alpha-asc':
-        sortedList = this.state.demographicList.sort(compares.alphaCompareAsc);
+        sortedList = this.state.zipList.sort(compares.alphaCompareAsc);
         break;
       case 'alpha-des':
-        sortedList = this.state.demographicList.sort(compares.alphaCompareDes);
+        sortedList = this.state.zipList.sort(compares.alphaCompareDes);
         break;
     }
     this.setState({
-      sortedDemographicList: sortedList,
-      demographicList: sortedList
+      sortedZip: sortedList,
+      zipList: sortedList
     });
   }
 
@@ -68,6 +68,13 @@ class DemographicList extends Component {
     });
   }
 
+  renderZipDetails( zips ) {
+
+    return zips.map( (zip, index) => {
+      return <ZipDetail zipCode={zip} key={zip[1]} demographics={this.state.demographicList} />;
+    });
+  }
+
   renderFilterOptions (filters) {
     return filters.map( (filter, index) => {
 
@@ -91,7 +98,6 @@ class DemographicList extends Component {
           <div className="col-md-4 sort">
             <div className="form-group">
                 <select className="form-control" onChange={this.changeSort}>
-                  <option value='default'>Default</option>
                   <option value='alpha-asc'>Asc</option>
                   <option value='alpha-des'>Des</option>
                 </select>
@@ -103,12 +109,15 @@ class DemographicList extends Component {
             </div>
         </div>
         <div className="row hidden-sm-down">
-          <div className="col-md-4"><b>Demographic</b></div>
-          <div className="col-md-4"><b>Average</b></div>
-          <div className="col-md-4"><b>Largest</b></div>
+          <div className="col-md-2"><b>{this.state.demographicList[8].name}</b></div>
+          <div className="col-md-2"><b>{this.state.demographicList[9].name}</b></div>
+          <div className="col-md-2"><b>{this.state.demographicList[10].name}</b></div>
+          <div className="col-md-2"><b>{this.state.demographicList[11].name}</b></div>
+          <div className="col-md-2"><b>{this.state.demographicList[12].name}</b></div>
+          <div className="col-md-2"><b>{this.state.demographicList[13].name}</b></div>
         </div>
         <div className="listing">
-          { this.renderDemoDetails(this.state.demographicList) }
+          { this.renderZipDetails(this.state.zipList) }
         </div>
       </div>
     )

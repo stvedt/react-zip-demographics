@@ -12,7 +12,8 @@ export default class App extends Component {
     fetch('https://data.cityofnewyork.us/api/views/kku6-nxdu/rows.json').then((response) => {
       return response.json();
     }).then((data) => {
-      let fetchedData = data.meta.view;
+      console.log(data);
+      let fetchedData = data;
       this.setState({ data: fetchedData });
     });
   }
