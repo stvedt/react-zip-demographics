@@ -6,9 +6,12 @@ body {
 }
 
 /* Filter */
-.filter {
-  text-align: right;
+@media (min-width: 768px) {
+  .filter {
+    text-align: right;
+  }
 }
+
 
 /* Listing */
 .listing .row:nth-child(odd) {
