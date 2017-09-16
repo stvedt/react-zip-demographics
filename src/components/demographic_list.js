@@ -102,7 +102,7 @@ class DemographicList extends Component {
               { this.renderFilterOptions(this.uniqueFilters)}
             </div>
         </div>
-        <div className="row">
+        <div className="row hidden-sm-down">
           <div className="col-md-4"><b>Demographic</b></div>
           <div className="col-md-4"><b>Average</b></div>
           <div className="col-md-4"><b>Largest</b></div>
