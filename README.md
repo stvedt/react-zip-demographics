@@ -17,3 +17,5 @@ Application will run on [http://localhost:8080/](http://localhost:8080/).
 - The way the default sort is being stored does not play as nicely as I'd like with filtering. So when choosing that sort I'm just removing any filters
 - Don't use hard indexes for displaying appropriate columns
 - Better Performance of filtering
+- Display more columns and think of more user friendly solution on mobile?
+- Utilize redux to store data from API if more endpoints are going to eventually be called.
