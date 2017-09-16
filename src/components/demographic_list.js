@@ -5,11 +5,9 @@ import * as compares from '../helpers/sort_compares';
 class DemographicList extends Component {
   constructor(props){
     super(props);
-    // console.log(props.data);
     this.originalDemographicList = props.data.meta.view.columns.slice();
     this.zipList = props.data.data;
-    console.log(this.originalDemographicList);
-    this.uniqueFilters = ['default','count', 'percent']
+    this.uniqueFilters = ['default','tens', 'elevens','greater']
     this.state = {
       sort: 'alpha-asc',
       filter: 'default',
@@ -43,17 +41,37 @@ class DemographicList extends Component {
     let filterType = event.target.value;
     this.setState({filter: filterType });
 
-    if (filterType === 'default') {
-      this.setState({ demographicList: this.state.sortedDemographicList });
-      return;
+    let filterString = "";
+    let greater = false;
+
+    switch(filterType){
+      case 'default':
+        this.setState({ zipList: this.zipList});
+        return;
+        break;
+      case 'tens':
+        filterString = "10"
+        greater = false
+        break;
+      case 'elevens':
+        filterString = "11"
+        greater = false
+        break;
+        case 'greater':
+          filterString = "11"
+          greater = true
+          break;
     }
 
-    let filteredList = this.state.sortedDemographicList.filter((demo)=>{
-      let testName = demo.name.toLowerCase();
-      return testName.includes(filterType);
+    let filteredList = this.state.sortedZipList.filter((zip)=>{
+      let testZip = String(zip[8]).substring(0,2);
+      if (greater){
+        return testZip > filterString;
+      }
+      return testZip === filterString;
     });
 
-    this.setState({ demographicList: filteredList});
+    this.setState({ zipList: filteredList});
   }
 
   renderZipDetails( zips ) {
