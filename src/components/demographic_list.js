@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DemographicDetail from './demographic_detail';
 import ZipDetail from './zip_detail';
 import * as compares from '../helpers/sort_compares';
 
@@ -12,7 +11,7 @@ class DemographicList extends Component {
     console.log(this.originalDemographicList);
     this.uniqueFilters = ['default','count', 'percent']
     this.state = {
-      sort: 'default',
+      sort: 'alpha-asc',
       filter: 'default',
       demographicList: this.originalDemographicList.slice(),
       zipList: this.zipList,
@@ -55,17 +54,6 @@ class DemographicList extends Component {
     });
 
     this.setState({ demographicList: filteredList});
-  }
-
-  renderDemoDetails( demos ) {
-
-    let filteredDemos = demos.filter(function (demo) {
-        return demo.id !== -1;
-    });
-
-    return filteredDemos.map( (demo, index) => {
-      return <DemographicDetail demo={demo} key={demo.id} />;
-    });
   }
 
   renderZipDetails( zips ) {
