@@ -1,0 +1,16 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+  font-size: 12px;
+}
+
+/* Filter */
+.filter {
+  text-align: right;
+}
+
+/* Listing */
+.listing .row:nth-child(odd) {
+    background-color: lightgrey;
+}
