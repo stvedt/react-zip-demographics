@@ -79,9 +79,7 @@ class DemographicList extends Component {
           </label>
       );
     });
-    //this.uniqueFilters
   }
-
 
   render (){
     return (
